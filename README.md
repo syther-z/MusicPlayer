@@ -1,14 +1,19 @@
-# cook_the_best
+# Music Player
 
-A new Flutter project.
+A Music Player made using flutter for cross-platform support.
+</br></br>
+It's a initial build so, many features are missing...
 
-## Getting Started
+## Tools:-
+<ul>
+  <li>bloc</li>
+  <li>just_audio</li>
+  <li>permission_handler</li>
+</ul>
 
-This project is a starting point for a Flutter application.
+## Preview:-
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+<img src='https://www.github.com/syther-z/MusicPlayer/home.png'/>
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
 For help getting started with Flutter development, view the
