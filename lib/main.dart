@@ -18,6 +18,7 @@ var defaultHome = DefaultHome([]);
 var audioPlayer = PlayerLogic(Player());
 var  currentSong = SongCubit(Song(path: null, idx: -1));
 var sliderCubit = SliderCubit(0);
+var playedCubit = PlayedCubit('00:00');
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
           BlocProvider.value(value: defaultHome),
           BlocProvider.value(value: audioPlayer),
           BlocProvider.value(value: currentSong),
-          BlocProvider.value(value: sliderCubit)
+          BlocProvider.value(value: sliderCubit),
+          BlocProvider.value(value: playedCubit)
         ],
          child:  SafeArea(
            child: MaterialApp.router(

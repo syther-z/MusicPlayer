@@ -1,6 +1,7 @@
 import 'package:cook_the_best/audio_schema.dart';
 import 'package:cook_the_best/home_cubit.dart';
 import 'package:cook_the_best/main.dart';
+import 'package:cook_the_best/player.dart';
 import 'package:cook_the_best/player_cubit.dart';
 import 'package:cook_the_best/song_cubit.dart';
 import 'package:cook_the_best/style.dart';
@@ -66,12 +67,13 @@ class _PlayerPageState extends State<PlayerPage> {
                         maxHeight: 100
                       ),
                       child: Container(
+                        // color: Colors.amber,
                         alignment: Alignment.center,
                         height: 100,
                         child: Text(
-                          context.read<DefaultHome>().state[widget.idx!].title,
+                          context.read<SongCubit>().state.title,
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -103,9 +105,11 @@ class _PlayerPageState extends State<PlayerPage> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text("1:20", style: TextStyle(color: Colors.white70)),
-                        Text("3:45", style: TextStyle(color: Colors.white70)),
+                      children: [
+                        BlocBuilder<PlayedCubit, String>(
+                          builder: (context, state) => Text(playedCubit.state, style: TextStyle(color: Colors.white70)),
+                        ),
+                        Text(Player.durationToString(Player.toDuration(currentSong.state.length!)), style: TextStyle(color: Colors.white70)),
                       ],
                     ),
                     const SizedBox(height: 30),

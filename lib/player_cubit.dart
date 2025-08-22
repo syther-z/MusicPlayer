@@ -14,3 +14,11 @@ class SliderCubit extends Cubit<double>{
     emit(value);
   }
 }
+
+
+class PlayedCubit extends Cubit<String>{
+  PlayedCubit(super.initialState);
+  void update(String value){
+    emit(value);
+  }
+}

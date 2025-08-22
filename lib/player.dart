@@ -10,13 +10,13 @@ class Player{
   Song? cSong;
   Player(){
     audio = AudioPlayer();
+    currentDurationUpdate();
   }
 
 
   void setMusic(Song song){
     cSong = song;
     audio.setUrl(song.path!);
-    currentDuration();
   }
 
   int duration(){
@@ -43,6 +43,7 @@ class Player{
     cSong = defaultHome.state[nextIdx];
     currentSong.update(cSong!);
     setMusic(defaultHome.state[nextIdx]);
+    play();
   }
 
   void playPrevious(){
@@ -50,6 +51,7 @@ class Player{
     cSong = defaultHome.state[preIdx];
     currentSong.update(cSong!);
     setMusic(defaultHome.state[preIdx]);
+    play();
   }
 
   void goTo(double value){
@@ -63,15 +65,36 @@ class Player{
      return Duration(minutes: min, seconds: sec);
   }
 
-  toPoint(Duration duration){
+  double toPoint(Duration duration){
       return duration.inSeconds / cSong!.length! * 100;
   }
 
-  void currentDuration(){
+  void currentDurationUpdate(){
     audio.positionStream.listen((data){
-      print(data);
-      sliderCubit.update(toPoint(data));
+      var p = toPoint(data);
+      if(p >= 100){
+        // audio.stop();
+        playNext();
+      }
+      playedCubit.update(durationToString(data));
+      sliderCubit.update(p);
     });
   }
 
+  static String durationToString(Duration duration){
+    // print(duration.toString());
+    int d = duration.inSeconds;
+    String s = "";
+    int hours = (d / 3600).toInt();
+    if(hours != 0) s += '$hours:';
+    d %= 3600;
+    int minutes = (d / 60).toInt();
+    if(minutes < 10) s += '0';
+    s += '$minutes:';
+    d %= 60;
+    int seconds = (d).toInt();
+    if(seconds < 10) s += '0';
+    s += '$seconds';
+    return s;
+  }
 }
