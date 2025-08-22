@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         ],
          child:  SafeArea(
            child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             routerConfig: Approuter().router,
            ),
          ),
