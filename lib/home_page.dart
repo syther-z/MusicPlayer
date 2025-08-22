@@ -1,6 +1,8 @@
 import 'package:cook_the_best/audio_schema.dart';
 import 'package:cook_the_best/player_cubit.dart';
 import 'package:cook_the_best/song_cubit.dart';
+import 'package:cook_the_best/style.dart';
+import 'package:cook_the_best/tab_controll.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -48,9 +50,9 @@ class _HomePageState extends State<HomePage>
             padding: const EdgeInsets.symmetric(horizontal: 20),
             height: 80,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF6D28D9), Color(0xFF9333EA)],
+                colors: appBar,
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -90,20 +92,8 @@ class _HomePageState extends State<HomePage>
                   child: TabBarView(
                     controller: _controller,
                     children: [
-                      Container(
-                        color: Colors.black,
-                        padding: const EdgeInsets.all(8),
-                        child: const LocalList(),
-                      ),
-                      Container(
-                        color: Colors.black,
-                        child: const Center(
-                          child: Text(
-                            "Online Songs Coming Soon",
-                            style: TextStyle(color: Colors.white70),
-                          ),
-                        ),
-                      ),
+                      tabPage(LocalList()),
+                      tabPage(Center(child: Text('Coming Soon', style: TextStyle(color: Colors.grey.shade400),),)),
                     ],
                   ),
                 ),
@@ -152,7 +142,7 @@ class _HomePageState extends State<HomePage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:  [
                         Text(
-                          context.read<SongCubit>().state.title ?? "Song Title",
+                          context.read<SongCubit>().state.title,
                           style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -202,14 +192,11 @@ class _HomePageState extends State<HomePage>
                     indicator: BoxDecoration(
                       // color: Colors.deepPurple,
                       // borderRadius: BorderRadius.circular(25),
-                      border: Border(bottom: BorderSide(color: Colors.deepPurple, width: 2))
+                      border: Border(bottom: BorderSide(color: Colors.pink, width: 2))
                     ),
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.grey,
-                    tabs: const [
-                      Tab(text: "Local"),
-                      Tab(text: "Online"),
-                    ],
+                    tabs: tabs
                   ),
                 ),
         ],

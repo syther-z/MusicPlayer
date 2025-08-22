@@ -35,7 +35,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 width: 300,
                 height: 300,
                 decoration: BoxDecoration(
-                  color: Colors.amber,
+                  color: const Color.fromARGB(255, 32, 32, 32),
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
                     image: NetworkImage(
